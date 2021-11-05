@@ -1,0 +1,9 @@
+int32  arm 
+float64 torso_ang
+float64 shoulder_ang
+float64 upper_arm_bottom_ang
+float64 upper_arm_top_ang
+float64 forearm_bottom_ang
+float64 forearm_top_ang
+---
+bool pos_ok

@@ -1,0 +1,9 @@
+controller_frequency: 5.0
+TrajectoryPlannerROS:
+  holonomic_robot: false
+  meter_scoring: true
+  max_vel_x: 0.5
+  min_vel_x: -0.1
+  
+  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 3.14159

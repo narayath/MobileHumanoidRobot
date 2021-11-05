@@ -1,0 +1,4198 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='pluto.xacro'>
+      <link name='base_footprint'>
+        <inertial>
+          <pose>3.3e-05 0 0.001744 0 -0 0</pose>
+          <mass>2.2</mass>
+          <inertia>
+            <ixx>2.20549</ixx>
+            <ixy>0</ixy>
+            <ixz>-0.00104651</ixz>
+            <iyy>2.20551</iyy>
+            <iyz>0</iyz>
+            <izz>2.15057</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_footprint_fixed_joint_lump__base_link_collision'>
+          <pose>-0.015 -0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Chassis.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_footprint_fixed_joint_lump__sensor_laser_collision_1'>
+          <pose>0.01 0 0.525 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.02</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='base_footprint_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__base_link_visual_1'>
+          <pose>-0.015 -0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Chassis.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_footprint_fixed_joint_lump__sensor_laser_visual_2'>
+          <pose>0.01 0 0.525 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.02</size>
+            </box>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <sensor name='head_hokuyo_sensor' type='ray'>
+          <visualize>1</visualize>
+          <update_rate>20</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1440</samples>
+                <resolution>1</resolution>
+                <min_angle>-3.14159</min_angle>
+                <max_angle>3.14159</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
+            <topicName>/scan</topicName>
+            <frameName>sensor_laser</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0.01 0 0.525 0 -0 0</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='caster_wheel_joint' type='revolute'>
+        <pose relative_to='base_footprint'>0.085 0 0.004 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>caster_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='caster_wheel'>
+        <pose relative_to='caster_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>5</mass>
+          <inertia>
+            <ixx>0.0003125</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0003125</iyy>
+            <iyz>0</iyz>
+            <izz>0.0003125</izz>
+          </inertia>
+        </inertial>
+        <collision name='caster_wheel_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.0125</radius>
+            </sphere>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='caster_wheel_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.0125</radius>
+            </sphere>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_wheel_joint' type='revolute'>
+        <pose relative_to='base_footprint'>-0.0725 0.1145 0.0324 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>left_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_wheel'>
+        <pose relative_to='left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0.0279569</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0279569</iyy>
+            <iyz>0</iyz>
+            <izz>0.0516128</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_wheel_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Wheel.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_wheel_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_wheel_joint' type='revolute'>
+        <pose relative_to='base_footprint'>-0.0725 -0.1145 0.0324 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>right_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_wheel'>
+        <pose relative_to='right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0.0279569</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0279569</iyy>
+            <iyz>0</iyz>
+            <izz>0.0516128</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_wheel_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Wheel.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_wheel_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='torso_joint' type='revolute'>
+        <pose relative_to='base_footprint'>0 0 0 0 -0 0</pose>
+        <parent>base_footprint</parent>
+        <child>torso</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='torso'>
+        <pose relative_to='torso_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.401074</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.455913</iyy>
+            <iyz>0</iyz>
+            <izz>0.160215</izz>
+          </inertia>
+        </inertial>
+        <collision name='torso_collision'>
+          <pose>0 0 0.32 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Torso.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='torso_visual'>
+          <pose>0 0 0.32 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Torso.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='head_joint' type='revolute'>
+        <pose relative_to='torso'>0.01 0 0.47 0 -0 0</pose>
+        <parent>torso</parent>
+        <child>head</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='head'>
+        <pose relative_to='head_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.00526881</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00526881</iyy>
+            <iyz>0</iyz>
+            <izz>0.00526881</izz>
+          </inertia>
+        </inertial>
+        <collision name='head_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Head.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='head_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Head.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_shoulder_joint' type='revolute'>
+        <pose relative_to='torso'>0 0.055 0.372 0 -0 0</pose>
+        <parent>torso</parent>
+        <child>left_shoulder</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>30</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_shoulder'>
+        <pose relative_to='left_shoulder_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>3</mass>
+          <inertia>
+            <ixx>0.00306451</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00306451</iyy>
+            <iyz>0</iyz>
+            <izz>0.00217741</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_shoulder_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Shoulder.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_shoulder_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Shoulder.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_upper_arm_bottom_joint' type='revolute'>
+        <pose relative_to='left_shoulder'>0 0.0225 0 0 -0 0</pose>
+        <parent>left_shoulder</parent>
+        <child>left_upper_arm_bottom</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>30</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_upper_arm_bottom'>
+        <pose relative_to='left_upper_arm_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.00281417</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00281417</iyy>
+            <iyz>0</iyz>
+            <izz>0.000252016</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_upper_arm_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_upper_arm_bottom_visual'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_upper_arm_top_joint' type='revolute'>
+        <pose relative_to='left_upper_arm_bottom'>0 0 -0.03125 0 -0 0</pose>
+        <parent>left_upper_arm_bottom</parent>
+        <child>left_upper_arm_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_upper_arm_top'>
+        <pose relative_to='left_upper_arm_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>4</mass>
+          <inertia>
+            <ixx>0.0225134</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0225134</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201613</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_upper_arm_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_upper_arm_top_visual'>
+          <pose>0 0 0 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_forearm_bottom_joint' type='revolute'>
+        <pose relative_to='left_upper_arm_top'>0 0 -0.07625 3.14159 1.57079 3.14159</pose>
+        <parent>left_upper_arm_top</parent>
+        <child>left_forearm_bottom</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>10</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_forearm_bottom'>
+        <pose relative_to='left_forearm_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.000556114</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000556114</iyy>
+            <iyz>0</iyz>
+            <izz>0.000252016</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_forearm_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_forearm_bottom_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_forearm_top_joint' type='revolute'>
+        <pose relative_to='left_forearm_bottom'>0.029 0 0 0 -0 0</pose>
+        <parent>left_forearm_bottom</parent>
+        <child>left_forearm_top</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_forearm_top'>
+        <pose relative_to='left_forearm_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.4</mass>
+          <inertia>
+            <ixx>0.000444892</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000444892</iyy>
+            <iyz>0</iyz>
+            <izz>0.000201613</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_forearm_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_forearm_top_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_palm_joint' type='revolute'>
+        <pose relative_to='left_forearm_top'>0.06525 0 0 0 -0 0</pose>
+        <parent>left_forearm_top</parent>
+        <child>left_palm</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_palm'>
+        <pose relative_to='left_palm_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.00025 -0.000172 0 0 -0 0</pose>
+          <mass>0.32</mass>
+          <inertia>
+            <ixx>0.000447453</ixx>
+            <ixy>2.0625e-07</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000860513</iyy>
+            <iyz>0</iyz>
+            <izz>0.000447753</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_palm_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftPalm.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='left_palm_surface_collision_1'>
+          <pose>0.004 -0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftPalmSurface.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_palm_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftPalm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='left_palm_surface_visual_1'>
+          <pose>0.004 -0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftPalmSurface.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_index_bottom_joint' type='revolute'>
+        <pose relative_to='left_palm'>0.0395 0.0025 0.0132 0 -0 0</pose>
+        <parent>left_palm</parent>
+        <child>left_index_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_index_bottom'>
+        <pose relative_to='left_index_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_index_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_index_bottom_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_index_top_joint' type='revolute'>
+        <pose relative_to='left_index_bottom'>0.019 0.001 0 0 -0 0</pose>
+        <parent>left_index_bottom</parent>
+        <child>left_index_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_index_top'>
+        <pose relative_to='left_index_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_index_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_index_top_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_middle_bottom_joint' type='revolute'>
+        <pose relative_to='left_palm'>0.0395 0.00325 0.00425 0 -0 0</pose>
+        <parent>left_palm</parent>
+        <child>left_middle_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_middle_bottom'>
+        <pose relative_to='left_middle_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_middle_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_middle_bottom_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_middle_top_joint' type='revolute'>
+        <pose relative_to='left_middle_bottom'>0.0205 0 -0.0002 0 -0 0</pose>
+        <parent>left_middle_bottom</parent>
+        <child>left_middle_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_middle_top'>
+        <pose relative_to='left_middle_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_middle_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_middle_top_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_pinky_bottom_joint' type='revolute'>
+        <pose relative_to='left_palm'>0.0395 0.00325 -0.0125 0 -0 0</pose>
+        <parent>left_palm</parent>
+        <child>left_pinky_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_pinky_bottom'>
+        <pose relative_to='left_pinky_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_pinky_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_pinky_bottom_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_pinky_top_joint' type='revolute'>
+        <pose relative_to='left_pinky_bottom'>0.0145 -0.00025 0.0002 0 -0 0</pose>
+        <parent>left_pinky_bottom</parent>
+        <child>left_pinky_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_pinky_top'>
+        <pose relative_to='left_pinky_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_pinky_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_pinky_top_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_ring_bottom_joint' type='revolute'>
+        <pose relative_to='left_palm'>0.0395 0.00325 -0.00425 0 -0 0</pose>
+        <parent>left_palm</parent>
+        <child>left_ring_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_ring_bottom'>
+        <pose relative_to='left_ring_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_ring_bottom_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_ring_bottom_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_ring_top_joint' type='revolute'>
+        <pose relative_to='left_ring_bottom'>0.019 -0.0005 0.0002 0 -0 0</pose>
+        <parent>left_ring_bottom</parent>
+        <child>left_ring_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_ring_top'>
+        <pose relative_to='left_ring_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_ring_top_collision'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_ring_top_visual'>
+          <pose>0 0 0 3.14159 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_thumb_piece_joint' type='revolute'>
+        <pose relative_to='left_palm'>0.014 0.002 0.0125 0 -0 0</pose>
+        <parent>left_palm</parent>
+        <child>left_thumb_piece</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_thumb_piece'>
+        <pose relative_to='left_thumb_piece_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>2.68817e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.30107e-05</iyy>
+            <iyz>0</iyz>
+            <izz>2.68817e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_thumb_piece_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftThumbPiece.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_thumb_piece_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/LeftThumbPiece.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_thumb_bottom_joint' type='revolute'>
+        <pose relative_to='left_thumb_piece'>0.0035 0.00025 0.011 0 -0 0</pose>
+        <parent>left_thumb_piece</parent>
+        <child>left_thumb_bottom</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_thumb_bottom'>
+        <pose relative_to='left_thumb_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_thumb_bottom_collision'>
+          <pose>0 0 0 -0.314159 -0 -0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_thumb_bottom_visual'>
+          <pose>0 0 0 -0.314159 -0 -0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='left_thumb_top_joint' type='revolute'>
+        <pose relative_to='left_thumb_bottom'>0.0125 -0.0075 0 0 -0 0</pose>
+        <parent>left_thumb_bottom</parent>
+        <child>left_thumb_top</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='left_thumb_top'>
+        <pose relative_to='left_thumb_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='left_thumb_top_collision'>
+          <pose>0 0 0 -0.314159 -0 -0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='left_thumb_top_visual'>
+          <pose>0 0 0 -0.314159 -0 -0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_shoulder_joint' type='revolute'>
+        <pose relative_to='torso'>0 -0.055 0.372 0 -0 0</pose>
+        <parent>torso</parent>
+        <child>right_shoulder</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>30</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_shoulder'>
+        <pose relative_to='right_shoulder_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>3</mass>
+          <inertia>
+            <ixx>0.00306451</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00306451</iyy>
+            <iyz>0</iyz>
+            <izz>0.00217741</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_shoulder_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Shoulder.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_shoulder_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/Shoulder.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_upper_arm_bottom_joint' type='revolute'>
+        <pose relative_to='right_shoulder'>0 -0.0225 0 0 -0 0</pose>
+        <parent>right_shoulder</parent>
+        <child>right_upper_arm_bottom</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>30</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_upper_arm_bottom'>
+        <pose relative_to='right_upper_arm_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.00281417</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00281417</iyy>
+            <iyz>0</iyz>
+            <izz>0.000252016</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_upper_arm_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_upper_arm_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_upper_arm_top_joint' type='revolute'>
+        <pose relative_to='right_upper_arm_bottom'>0 0 -0.03125 0 -0 0</pose>
+        <parent>right_upper_arm_bottom</parent>
+        <child>right_upper_arm_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_upper_arm_top'>
+        <pose relative_to='right_upper_arm_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>4</mass>
+          <inertia>
+            <ixx>0.0225134</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0225134</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201613</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_upper_arm_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_upper_arm_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/UpperArmTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_forearm_bottom_joint' type='revolute'>
+        <pose relative_to='right_upper_arm_top'>0 0 -0.07625 3.14159 1.57079 3.14159</pose>
+        <parent>right_upper_arm_top</parent>
+        <child>right_forearm_bottom</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>10</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_forearm_bottom'>
+        <pose relative_to='right_forearm_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.000556114</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000556114</iyy>
+            <iyz>0</iyz>
+            <izz>0.000252016</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_forearm_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_forearm_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_forearm_top_joint' type='revolute'>
+        <pose relative_to='right_forearm_bottom'>0.029 0 0 0 -0 0</pose>
+        <parent>right_forearm_bottom</parent>
+        <child>right_forearm_top</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_forearm_top'>
+        <pose relative_to='right_forearm_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.4</mass>
+          <inertia>
+            <ixx>0.000444892</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000444892</iyy>
+            <iyz>0</iyz>
+            <izz>0.000201613</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_forearm_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_forearm_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ForearmTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_palm_joint' type='revolute'>
+        <pose relative_to='right_forearm_top'>0.06525 0 0 0 -0 0</pose>
+        <parent>right_forearm_top</parent>
+        <child>right_palm</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_palm'>
+        <pose relative_to='right_palm_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.00025 0.000172 0 0 -0 0</pose>
+          <mass>0.32</mass>
+          <inertia>
+            <ixx>0.000447453</ixx>
+            <ixy>-2.0625e-07</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000860513</iyy>
+            <iyz>0</iyz>
+            <izz>0.000447753</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_palm_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightPalm.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='right_palm_surface_collision_1'>
+          <pose>0.004 0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightPalmSurface.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_palm_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightPalm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='right_palm_surface_visual_1'>
+          <pose>0.004 0.00275 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightPalmSurface.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_index_bottom_joint' type='revolute'>
+        <pose relative_to='right_palm'>0.0395 -0.0025 0.0132 0 -0 0</pose>
+        <parent>right_palm</parent>
+        <child>right_index_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_index_bottom'>
+        <pose relative_to='right_index_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_index_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_index_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_index_top_joint' type='revolute'>
+        <pose relative_to='right_index_bottom'>0.019 -0.001 0 0 -0 0</pose>
+        <parent>right_index_bottom</parent>
+        <child>right_index_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_index_top'>
+        <pose relative_to='right_index_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_index_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_index_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/IndexTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_middle_bottom_joint' type='revolute'>
+        <pose relative_to='right_palm'>0.0395 -0.00325 0.00425 0 -0 0</pose>
+        <parent>right_palm</parent>
+        <child>right_middle_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_middle_bottom'>
+        <pose relative_to='right_middle_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_middle_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_middle_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_middle_top_joint' type='revolute'>
+        <pose relative_to='right_middle_bottom'>0.0205 0 -0.0002 0 -0 0</pose>
+        <parent>right_middle_bottom</parent>
+        <child>right_middle_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_middle_top'>
+        <pose relative_to='right_middle_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_middle_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_middle_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/MiddleTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_pinky_bottom_joint' type='revolute'>
+        <pose relative_to='right_palm'>0.0395 -0.00325 -0.0125 0 -0 0</pose>
+        <parent>right_palm</parent>
+        <child>right_pinky_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_pinky_bottom'>
+        <pose relative_to='right_pinky_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_pinky_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_pinky_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_pinky_top_joint' type='revolute'>
+        <pose relative_to='right_pinky_bottom'>0.0145 0.00025 0.0002 0 -0 0</pose>
+        <parent>right_pinky_bottom</parent>
+        <child>right_pinky_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_pinky_top'>
+        <pose relative_to='right_pinky_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_pinky_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_pinky_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/PinkyTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_ring_bottom_joint' type='revolute'>
+        <pose relative_to='right_palm'>0.0395 -0.00325 -0.00425 0 -0 0</pose>
+        <parent>right_palm</parent>
+        <child>right_ring_bottom</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_ring_bottom'>
+        <pose relative_to='right_ring_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_ring_bottom_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_ring_bottom_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_ring_top_joint' type='revolute'>
+        <pose relative_to='right_ring_bottom'>0.019 0.0005 0.0002 0 -0 0</pose>
+        <parent>right_ring_bottom</parent>
+        <child>right_ring_top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_ring_top'>
+        <pose relative_to='right_ring_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_ring_top_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_ring_top_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RingTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_thumb_piece_joint' type='revolute'>
+        <pose relative_to='right_palm'>0.0135 -0.002 0.0125 0 -0 0</pose>
+        <parent>right_palm</parent>
+        <child>right_thumb_piece</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_thumb_piece'>
+        <pose relative_to='right_thumb_piece_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>2.68817e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.30107e-05</iyy>
+            <iyz>0</iyz>
+            <izz>2.68817e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_thumb_piece_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightThumbPiece.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_thumb_piece_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/RightThumbPiece.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_thumb_bottom_joint' type='revolute'>
+        <pose relative_to='right_thumb_piece'>0.0035 -0.00025 0.011 0 -0 0</pose>
+        <parent>right_thumb_piece</parent>
+        <child>right_thumb_bottom</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_thumb_bottom'>
+        <pose relative_to='right_thumb_bottom_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_thumb_bottom_collision'>
+          <pose>0 0 0 0.314159 -0 0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbBottom.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_thumb_bottom_visual'>
+          <pose>0 0 0 0.314159 -0 0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbBottom.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='right_thumb_top_joint' type='revolute'>
+        <pose relative_to='right_thumb_bottom'>0.0125 0.0075 0 0 -0 0</pose>
+        <parent>right_thumb_bottom</parent>
+        <child>right_thumb_top</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='right_thumb_top'>
+        <pose relative_to='right_thumb_top_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.02</mass>
+          <inertia>
+            <ixx>4.50268e-06</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.50268e-06</iyy>
+            <iyz>0</iyz>
+            <izz>4.03225e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='right_thumb_top_collision'>
+          <pose>0 0 0 0.314159 -0 0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbTop.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='right_thumb_top_visual'>
+          <pose>0 0 0 0.314159 -0 0.523599</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/tuttu/ros_ws/src/pluto/models/ThumbTop.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>0</static>
+      <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+        <alwaysOn>0</alwaysOn>
+        <legacyMode>0</legacyMode>
+        <updateRate>20</updateRate>
+        <leftJoint>left_wheel_joint</leftJoint>
+        <rightJoint>right_wheel_joint</rightJoint>
+        <wheelSeparation>0.5205</wheelSeparation>
+        <wheelDiameter>0.2032</wheelDiameter>
+        <torque>20</torque>
+        <commandTopic>/cmd_vel</commandTopic>
+        <odometryTopic>/odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <robotBaseFrame>base_footprint</robotBaseFrame>
+        <publishOdom>1</publishOdom>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <pose>0 0 0.5 0 -0 0</pose>
+    </model>
+    <model name='Basement'>
+      <pose>-6.05553 -1.14361 0 0 -0 0</pose>
+      <link name='Wall_0'>
+        <collision name='Wall_0_Collision'>
+          <geometry>
+            <box>
+              <size>4.876 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_0_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.876 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>7.20212 2.54754 0 0 -0 1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_10'>
+        <collision name='Wall_10_Collision'>
+          <geometry>
+            <box>
+              <size>4.98852 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_10_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.98852 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>5.64804 -2.49054 0 0 -0 -1.58323</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_11'>
+        <collision name='Wall_11_Collision'>
+          <geometry>
+            <box>
+              <size>13 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_11_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>13 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-0.776956 -4.87954 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_12'>
+        <collision name='Wall_12_Collision'>
+          <geometry>
+            <box>
+              <size>4.5 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_12_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.5 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-7.20196 -2.70454 0 0 -0 1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_15'>
+        <collision name='Wall_15_Collision'>
+          <geometry>
+            <box>
+              <size>5.5 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_15_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5.5 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-7.20196 2.14546 0 0 -0 1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_16'>
+        <collision name='Wall_16_Collision'>
+          <geometry>
+            <box>
+              <size>3.86008 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_16_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.86008 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-5.34692 4.8245 0 0 -0 0.002176</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_17'>
+        <collision name='Wall_17_Collision'>
+          <geometry>
+            <box>
+              <size>1.626 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_17_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.626 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-3.49188 4.09054 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_21'>
+        <collision name='Wall_21_Collision'>
+          <geometry>
+            <box>
+              <size>3.5 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_21_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.5 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-1.81688 3.35254 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_28'>
+        <collision name='Wall_28_Collision'>
+          <geometry>
+            <box>
+              <size>3.734 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_28_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.734 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>1.86612 3.11854 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_30'>
+        <collision name='Wall_30_Collision'>
+          <geometry>
+            <box>
+              <size>2 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_30_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.783119 3.35254 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_32'>
+        <collision name='Wall_32_Collision'>
+          <geometry>
+            <box>
+              <size>1.75 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_32_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.75 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>0.752479 0.564965 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_33'>
+        <collision name='Wall_33_Collision'>
+          <geometry>
+            <box>
+              <size>5 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_33_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-1.67252 -0.235035 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_34'>
+        <collision name='Wall_34_Collision'>
+          <geometry>
+            <box>
+              <size>1.33104 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_34_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.33104 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-4.44087 0.245406 0 0 -0 2.19129</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_35'>
+        <collision name='Wall_35_Collision'>
+          <geometry>
+            <box>
+              <size>0.75 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_35_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.75 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-5.08422 0.725847 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_37'>
+        <collision name='Wall_37_Collision'>
+          <geometry>
+            <box>
+              <size>1.95373 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_37_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.95373 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-3.94087 1.04541 0 0 -0 0.362199</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_38'>
+        <collision name='Wall_38_Collision'>
+          <geometry>
+            <box>
+              <size>4 0.15 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_38_Visual'>
+          <pose>0 0 1.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4 0.15 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>-1.17252 1.36496 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_4'>
+        <collision name='Wall_4_Collision'>
+          <geometry>
+            <box>
+              <size>5.486 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_4_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>5.486 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>4.53412 4.91054 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_6'>
+        <collision name='Wall_6_Collision'>
+          <geometry>
+            <box>
+              <size>1.674 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_6_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.674 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>6.44012 0.184538 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_7'>
+        <collision name='Wall_7_Collision'>
+          <geometry>
+            <box>
+              <size>0.406 0.15 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_7_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.406 0.15 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>5.67812 0.056538 0 0 -0 -1.5708</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='Wall_8'>
+        <collision name='Wall_8_Collision'>
+          <geometry>
+            <box>
+              <size>3.982 0.17 2</size>
+            </box>
+          </geometry>
+          <pose>0 0 1 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='Wall_8_Visual'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.982 0.17 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <pose>3.77212 -0.071462 0 0 -0 3.14159</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <state world_name='default'>
+      <sim_time>29 912000000</sim_time>
+      <real_time>105 779157074</real_time>
+      <wall_time>1635121148 31073998</wall_time>
+      <iterations>29912</iterations>
+      <model name='Basement'>
+        <pose>-6.05553 -1.14361 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Wall_0'>
+          <pose>1.14659 1.40393 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_10'>
+          <pose>-0.40749 -3.63415 0 0 0 -1.58323</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_11'>
+          <pose>-6.83249 -6.02315 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_12'>
+          <pose>-13.2575 -3.84815 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_15'>
+          <pose>-13.2575 1.00185 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_16'>
+          <pose>-11.4024 3.68089 0 0 -0 0.002176</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_17'>
+          <pose>-9.54741 2.94693 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_21'>
+          <pose>-7.87241 2.20893 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_28'>
+          <pose>-4.18941 1.97493 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_30'>
+          <pose>-5.27241 2.20893 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_32'>
+          <pose>-5.30305 -0.578645 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_33'>
+          <pose>-7.72805 -1.37864 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_34'>
+          <pose>-10.4964 -0.898204 0 0 -0 2.19129</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_35'>
+          <pose>-11.1397 -0.417763 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_37'>
+          <pose>-9.9964 -0.0982 0 0 -0 0.362199</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_38'>
+          <pose>-7.22805 0.22135 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_4'>
+          <pose>-1.52141 3.76693 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_6'>
+          <pose>0.38459 -0.959072 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_7'>
+          <pose>-0.37741 -1.08707 0 0 0 -1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='Wall_8'>
+          <pose>-2.28341 -1.21507 0 0 -0 3.14159</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pluto.xacro'>
+        <pose>0.004662 0.00023 0.007899 -1.1e-05 -0.006992 0.000266</pose>
+        <scale>1 1 1</scale>
+        <link name='base_footprint'>
+          <pose>0.004662 0.00023 0.007899 -1.1e-05 -0.006992 0.000266</pose>
+          <velocity>0.000149 9e-06 -0.004918 -2.1e-05 0.000259 4.7e-05</velocity>
+          <acceleration>0.031297 0.000214 -9.83583 -0.041455 0.504983 0.002303</acceleration>
+          <wrench>1.88407 0.012897 -592.117 0 -0 0</wrench>
+        </link>
+        <link name='caster_wheel'>
+          <pose>0.089632 0.000253 0.012495 -1.6e-05 0.468892 0.000259</pose>
+          <velocity>0.000149 1.7e-05 -0.005361 0.000701 0.009472 4.7e-05</velocity>
+          <acceleration>0.030669 0.007892 -10.7214 1.41029 0.000376 0.002489</acceleration>
+          <wrench>0.153346 0.039462 -53.6071 0 -0 0</wrench>
+        </link>
+        <link name='head'>
+          <pose>0.011375 3.1e-05 0.477957 -1.2e-05 -0.00699 0.000422</pose>
+          <velocity>-1.5e-05 1.1e-05 -0.004903 1.9e-05 -0.000296 1.5e-05</velocity>
+          <acceleration>-0.303796 -0.025214 -9.80714 0.038399 -0.605975 0.000274</acceleration>
+          <wrench>-0.303796 -0.025214 -9.80714 0 -0 0</wrench>
+        </link>
+        <link name='left_forearm_bottom'>
+          <pose>0.004754 0.077181 0.272407 -0.507467 1.55391 -0.160799</pose>
+          <velocity>0.030259 0.007792 -0.004514 0.000876 -0.087629 0.08209</velocity>
+          <acceleration>-0.266558 -0.011903 -9.55776 2.24913 0.365152 3.12659</acceleration>
+          <wrench>-0.133279 -0.005952 -4.77888 0 -0 0</wrench>
+        </link>
+        <link name='left_forearm_top'>
+          <pose>0.005237 0.077103 0.243411 -2.19611 1.55391 -0.160793</pose>
+          <velocity>0.032809 0.007862 -0.004464 0.00926 -0.08893 -0.423913</velocity>
+          <acceleration>-0.170879 0.003311 -9.54093 1.60833 0.334421 -0.013219</acceleration>
+          <wrench>-0.068352 0.001324 -3.81637 0 -0 0</wrench>
+        </link>
+        <link name='left_index_bottom'>
+          <pose>0.007355 0.091776 0.139193 1.64771 1.44175 -2.60087</pose>
+          <velocity>-0.019325 -0.026143 -0.018969 2.10616 1.14634 2.69467</velocity>
+          <acceleration>-0.037592 0.005091 -9.40217 0.735924 -0.333441 -0.004691</acceleration>
+          <wrench>-0.000752 0.000102 -0.188043 0 -0 0</wrench>
+        </link>
+        <link name='left_index_top'>
+          <pose>0.004371 0.090074 0.120479 -1.75238 1.51603 0.28313</pose>
+          <velocity>-0.057397 -0.044174 -0.011281 -0.026559 -0.017583 -0.424684</velocity>
+          <acceleration>0.053237 0.077841 -9.33674 -1.12101 -0.580154 -0.009245</acceleration>
+          <wrench>0.001065 0.001557 -0.186735 0 -0 0</wrench>
+        </link>
+        <link name='left_middle_bottom'>
+          <pose>0.010715 0.083447 0.139092 -1.65539 1.45352 0.380436</pose>
+          <velocity>-0.023188 -0.027724 -0.017334 2.16163 1.25762 2.69587</velocity>
+          <acceleration>-0.043315 0.002092 -9.3942 -2.38637 -1.2013 -0.061416</acceleration>
+          <wrench>-0.000866 4.2e-05 -0.187884 0 -0 0</wrench>
+        </link>
+        <link name='left_middle_top'>
+          <pose>0.013032 0.084159 0.118735 -1.74994 1.51529 0.285581</pose>
+          <velocity>-0.061222 -0.048723 -0.022455 -0.026674 -0.01767 -0.424726</velocity>
+          <acceleration>-0.059198 -0.012737 -9.316 -1.37079 -0.715114 -0.015756</acceleration>
+          <wrench>-0.001184 -0.000255 -0.18632 0 -0 0</wrench>
+        </link>
+        <link name='left_palm'>
+          <pose>0.006325 0.076926 0.17817 -1.60987 1.3149 0.426649</pose>
+          <velocity>0.038532 0.00801 -0.004368 2.27726 1.48775 2.69844</velocity>
+          <acceleration>0.015403 0.015347 -9.53388 -0.47874 1.0593 -0.415246</acceleration>
+          <wrench>0.004929 0.004911 -3.05084 0 -0 0</wrench>
+        </link>
+        <link name='left_pinky_bottom'>
+          <pose>0.018218 0.068472 0.139258 1.65273 1.44968 -2.5958</pose>
+          <velocity>-0.029548 -0.030904 -0.016808 1.80455 0.544687 2.68802</velocity>
+          <acceleration>-0.043742 0.009299 -9.37968 -0.707905 -0.666384 -3.0343</acceleration>
+          <wrench>-0.000875 0.000186 -0.187593 0 -0 0</wrench>
+        </link>
+        <link name='left_pinky_top'>
+          <pose>0.016853 0.067853 0.124832 -1.74962 1.5152 0.285894</pose>
+          <velocity>-0.067282 -0.049575 -0.01248 -0.026543 -0.017608 -0.424688</velocity>
+          <acceleration>0.020632 0.066746 -9.28218 -1.11867 -0.579767 -0.00987</acceleration>
+          <wrench>0.000413 0.001335 -0.185644 0 -0 0</wrench>
+        </link>
+        <link name='left_ring_bottom'>
+          <pose>0.014523 0.075848 0.139176 -1.61413 1.34037 0.422266</pose>
+          <velocity>-0.026419 -0.029339 -0.017071 2.62792 0.937701 -0.504723</velocity>
+          <acceleration>-0.049723 0.002971 -9.39364 -1.85363 0.652351 2.69702</acceleration>
+          <wrench>-0.000994 5.9e-05 -0.187873 0 -0 0</wrench>
+        </link>
+        <link name='left_ring_top'>
+          <pose>0.018827 0.078025 0.120788 -1.74882 1.51495 0.286699</pose>
+          <velocity>-0.157951 -0.098707 -0.056781 -0.026635 -0.017664 -0.424767</velocity>
+          <acceleration>-0.439742 -0.094072 -8.19724 -1.30207 -0.686923 -0.020961</acceleration>
+          <wrench>-0.008795 -0.001881 -0.163945 0 -0 0</wrench>
+        </link>
+        <link name='left_shoulder'>
+          <pose>0.003183 0.055223 0.379897 0.000132 -0.01043 -0.020401</pose>
+          <velocity>-6e-05 9e-06 -0.004886 -0.005296 -0.282887 0.002498</velocity>
+          <acceleration>-0.232189 -0.0039 -9.77123 -2.25563 0.803748 -0.993415</acceleration>
+          <wrench>-0.696567 -0.0117 -29.3137 0 -0 0</wrench>
+        </link>
+        <link name='left_thumb_bottom'>
+          <pose>0.000471 0.09975 0.161158 -2.09769 1.28103 -0.34669</pose>
+          <velocity>0.015337 -0.005272 -0.015815 -2.80359 1.27589 -2.75834</velocity>
+          <acceleration>-0.035053 0.002385 -9.49761 -0.956208 -1.07032 -0.213455</acceleration>
+          <wrench>-0.000701 4.8e-05 -0.189952 0 -0 0</wrench>
+        </link>
+        <link name='left_thumb_piece'>
+          <pose>0.002224 0.088697 0.163997 -1.35023 1.3149 0.42664</pose>
+          <velocity>0.020312 -0.002426 -0.007791 2.16201 1.54021 -3.10248</velocity>
+          <acceleration>-0.001712 0.013731 -9.51799 -3.03038 1.50006 -2.98384</acceleration>
+          <wrench>-0.000171 0.001373 -0.951799 0 -0 0</wrench>
+        </link>
+        <link name='left_thumb_top'>
+          <pose>0.010955 0.099973 0.151031 -0.459895 0.980714 1.37928</pose>
+          <velocity>-0.00365 0.002158 -0.035331 -1.43116 0.999462 -2.40021</velocity>
+          <acceleration>-0.132613 -0.012851 -9.47382 -1.87187 0.630317 -1.50639</acceleration>
+          <wrench>-0.002652 -0.000257 -0.189476 0 -0 0</wrench>
+        </link>
+        <link name='left_upper_arm_bottom'>
+          <pose>0.003643 0.077718 0.3799 -0.004782 -0.010431 -0.020401</pose>
+          <velocity>-0.000304 1e-06 -0.004772 0.072439 -0.284155 0.003293</velocity>
+          <acceleration>-0.655019 -0.020352 -9.54213 -3.10852 0.13931 -1.15871</acceleration>
+          <wrench>-0.327509 -0.010176 -4.77106 0 -0 0</wrench>
+        </link>
+        <link name='left_upper_arm_top'>
+          <pose>0.003966 0.077562 0.348652 -0.008208 -0.008021 0.346673</pose>
+          <velocity>0.008621 0.002268 -0.004726 0.071598 -0.283408 0.083796</velocity>
+          <acceleration>-0.461526 -0.014663 -9.60628 3.13182 -0.513197 3.01482</acceleration>
+          <wrench>-1.8461 -0.058652 -38.4251 0 -0 0</wrench>
+        </link>
+        <link name='left_wheel'>
+          <pose>-0.068094 0.114711 0.03979 -1.1e-05 0.021172 0.000266</pose>
+          <velocity>0.000202 1.1e-05 -0.004779 2.2e-05 0.000259 4.5e-05</velocity>
+          <acceleration>0.146926 0.010069 -9.55921 0.045167 -1.12335 -0.002995</acceleration>
+          <wrench>1.46926 0.100693 -95.5921 0 -0 0</wrench>
+        </link>
+        <link name='right_forearm_bottom'>
+          <pose>0.002887 -0.075293 0.272424 -2.29094 1.56274 -1.39647</pose>
+          <velocity>0.021997 0.001874 -0.004284 0.073833 -0.257658 0.199269</velocity>
+          <acceleration>-0.276058 -0.038877 -9.6101 -1.11842 -0.051764 0.011457</acceleration>
+          <wrench>-0.138029 -0.019439 -4.80505 0 -0 0</wrench>
+        </link>
+        <link name='right_forearm_top'>
+          <pose>0.002928 -0.075523 0.243425 2.87327 1.56274 -1.39643</pose>
+          <velocity>0.029488 0.004025 -0.00426 0.075176 -0.265756 -0.83048</velocity>
+          <acceleration>-0.217009 -0.00906 -9.54529 2.97377 -1.46782 -0.223714</acceleration>
+          <wrench>-0.086803 -0.003624 -3.81812 0 -0 0</wrench>
+        </link>
+        <link name='right_index_bottom'>
+          <pose>-0.007006 -0.066524 0.138811 -1.76788 1.53111 0.245768</pose>
+          <velocity>0.041622 0.009187 -0.002899 0.350513 -0.846813 -0.825503</velocity>
+          <acceleration>0.089956 0.08142 -9.38194 2.33282 -0.465003 -0.434058</acceleration>
+          <wrench>0.001799 0.001628 -0.187639 0 -0 0</wrench>
+        </link>
+        <link name='right_index_top'>
+          <pose>-0.005372 -0.065912 0.119865 1.92091 1.54814 -2.34887</pose>
+          <velocity>0.058156 0.014473 -0.001314 -0.038895 -0.02598 -0.832547</velocity>
+          <acceleration>-0.019665 -0.029143 -9.40032 -0.690103 -0.393169 -0.058681</acceleration>
+          <wrench>-0.000393 -0.000583 -0.188006 0 -0 0</wrench>
+        </link>
+        <link name='right_middle_bottom'>
+          <pose>-0.002506 -0.074296 0.138739 -1.66928 1.49159 0.34452</pose>
+          <velocity>0.035106 0.00541 -0.002769 1.09633 -1.05948 2.27273</velocity>
+          <acceleration>0.082935 0.084431 -9.3821 1.64215 1.26978 -0.855483</acceleration>
+          <wrench>0.001659 0.001689 -0.187642 0 -0 0</wrench>
+        </link>
+        <link name='right_middle_top'>
+          <pose>-0.000894 -0.073929 0.118304 1.90821 1.54732 -2.36157</pose>
+          <velocity>-0.050403 -0.037831 -0.010556 -0.038962 -0.025978 -0.832567</velocity>
+          <acceleration>-0.134042 0.129499 -8.96166 -0.78189 -0.438679 -0.059634</acceleration>
+          <wrench>-0.002681 0.00259 -0.179233 0 -0 0</wrench>
+        </link>
+        <link name='right_palm'>
+          <pose>0.003019 -0.076041 0.178177 1.61205 1.38122 -2.65837</pose>
+          <velocity>0.046397 0.008864 -0.004246 -0.204477 0.323309 -0.835538</velocity>
+          <acceleration>0.025768 0.056972 -9.47766 -2.40621 -0.505999 2.47798</acceleration>
+          <wrench>0.008246 0.018231 -3.03285 0 -0 0</wrench>
+        </link>
+        <link name='right_pinky_bottom'>
+          <pose>0.004669 -0.089431 0.13887 -1.63743 1.45375 0.376519</pose>
+          <velocity>0.022505 -0.000562 -0.001998 2.00407 0.853048 2.28918</velocity>
+          <acceleration>0.067637 0.092945 -9.37888 -2.39615 -0.339891 2.29959</acceleration>
+          <wrench>0.001353 0.001859 -0.187578 0 -0 0</wrench>
+        </link>
+        <link name='right_pinky_top'>
+          <pose>0.005934 -0.088735 0.124438 1.90668 1.54722 -2.36309</pose>
+          <velocity>-0.009927 -0.018079 -0.005757 -0.038864 -0.025928 -0.832553</velocity>
+          <acceleration>-0.079469 0.074396 -9.31557 -0.594404 -0.346386 -0.058364</acceleration>
+          <wrench>-0.001589 0.001488 -0.186311 0 -0 0</wrench>
+        </link>
+        <link name='right_ring_bottom'>
+          <pose>0.001135 -0.081977 0.138806 1.61875 1.40752 -2.65157</pose>
+          <velocity>0.028715 0.002383 -0.002383 -1.22206 0.337768 2.23064</velocity>
+          <acceleration>0.082775 0.097311 -9.39024 -0.267864 1.12203 -1.53004</acceleration>
+          <wrench>0.001655 0.001946 -0.187805 0 -0 0</wrench>
+        </link>
+        <link name='right_ring_top'>
+          <pose>-0.002123 -0.083461 0.120133 1.90285 1.54696 -2.36693</pose>
+          <velocity>-0.142404 -0.076258 0.032766 -0.038785 -0.02588 -0.832543</velocity>
+          <acceleration>0.214065 0.537619 -7.50477 -0.413121 -0.257427 -0.057424</acceleration>
+          <wrench>0.004281 0.010752 -0.150095 0 -0 0</wrench>
+        </link>
+        <link name='right_shoulder'>
+          <pose>0.00094 -0.054755 0.379883 0.000133 -0.022004 -0.020399</pose>
+          <velocity>0.000218 9e-06 -0.004916 -0.004095 -0.205159 0.001515</velocity>
+          <acceleration>0.003511 0.003833 -9.83351 -3.01936 0.646341 -2.97792</acceleration>
+          <wrench>0.010533 0.0115 -29.5005 0 -0 0</wrench>
+        </link>
+        <link name='right_thumb_bottom'>
+          <pose>0.006767 -0.061707 0.158952 -0.02298 0.437184 0.365584</pose>
+          <velocity>0.011863 0.112715 -0.011403 0.202018 0.113805 0.377168</velocity>
+          <acceleration>-0.948623 -0.242759 -9.17118 1.08947 1.15703 -3.05287</acceleration>
+          <wrench>-0.018972 -0.004855 -0.183424 0 -0 0</wrench>
+        </link>
+        <link name='right_thumb_piece'>
+          <pose>-0.002812 -0.06509 0.164445 -3.03164 1.38121 -2.65831</pose>
+          <velocity>0.051107 0.010931 -0.004579 1.58348 1.26242 -2.86797</velocity>
+          <acceleration>0.054521 0.064457 -9.44294 0.798383 0.773339 2.12954</acceleration>
+          <wrench>0.005452 0.006446 -0.944294 0 -0 0</wrench>
+        </link>
+        <link name='right_thumb_top'>
+          <pose>0.014598 -0.05068 0.153503 -1.6643 -1.54981 2.03964</pose>
+          <velocity>-0.077982 0.20815 0.050926 -1.39536 -0.973899 -2.66986</velocity>
+          <acceleration>-2.05638 -1.33731 -8.89078 1.92907 0.654063 -0.529214</acceleration>
+          <wrench>-0.041128 -0.026746 -0.177816 0 -0 0</wrench>
+        </link>
+        <link name='right_upper_arm_bottom'>
+          <pose>0.000481 -0.07725 0.37988 0.018658 -0.022004 -0.020392</pose>
+          <velocity>0.000226 1e-05 -0.004923 0.017583 -0.205697 0.00037</velocity>
+          <acceleration>-0.046927 0.007068 -9.84837 -2.95583 0.799201 0.774833</acceleration>
+          <wrench>-0.023464 0.003534 -4.92418 0 -0 0</wrench>
+        </link>
+        <link name='right_upper_arm_top'>
+          <pose>0.001181 -0.076681 0.348642 -0.006061 -0.028206 0.894662</pose>
+          <velocity>0.006376 0.000536 -0.004662 0.013136 -0.208795 0.198807</velocity>
+          <acceleration>-0.471574 -0.037541 -9.62871 3.07269 -0.118361 -2.55412</acceleration>
+          <wrench>-1.8863 -0.150165 -38.5148 0 -0 0</wrench>
+        </link>
+        <link name='right_wheel'>
+          <pose>-0.068033 -0.114289 0.039792 -1.1e-05 0.024331 0.000266</pose>
+          <velocity>0.000214 1.1e-05 -0.004773 1.8e-05 0.000259 6.1e-05</velocity>
+          <acceleration>0.15063 0.010366 -9.54798 0.036099 -1.34044 0.029951</acceleration>
+          <wrench>1.5063 0.10366 -95.4798 0 -0 0</wrench>
+        </link>
+        <link name='torso'>
+          <pose>0.004662 0.00023 0.007899 0.000133 -0.00699 -0.020395</pose>
+          <velocity>0.000147 9e-06 -0.004916 -3e-05 0.000224 0.001272</velocity>
+          <acceleration>0.02688 -0.000491 -9.83161 -0.039258 0.435022 -0.373191</acceleration>
+          <wrench>0.537597 -0.009813 -196.632 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>18.3883 -23.6661 7.63941 0 0.275643 2.35619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

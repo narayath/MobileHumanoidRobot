@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<launch>
+<!--param name="use_sim_time" value="true"/-->
+<param name="robot_description" command="$(find xacro)/xacro --inorder $(find pluto)/urdf/pluto.xacro"/>  
+ 
+  
+  
+  <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false"/-->
+ 
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+   <param name="robot_description" command="$(find xacro)/xacro inorder $(find pluto)/urdf/pluto.xacro"/>
+  </node-->
+ 
+  <!--node name="rviz" pkg="rviz" type="rviz" required="true"/-->
+  
+  <!--Gazebo empty world launch file-->
+  <!--include file="$(find gazebo_ros)/launch/empty_world.launch">
+    	<arg name="debug" value="false" />
+    	<arg name="gui" value="true" />
+    	<arg name="paused" value="false"/>
+    	<arg name="use_sim_time" value="true"/>
+    	<arg name="headless" value="false"/>
+    	<arg name="verbose" value="true"/>
+  </include-->
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    	<arg name="debug" value="false" />
+    	<arg name="gui" value="true" />
+    	<arg name="paused" value="false"/>
+    	<arg name="use_sim_time" value="true"/>
+    	<arg name="headless" value="false"/>
+    	<arg name="verbose" value="true"/>
+    	<arg name="world_name" value="$(find pluto)/worlds/basement_with_robot.world"/>
+  </include>
+
+  <rosparam command="load" file="$(find pluto)/config/joint_state_controller.yaml" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/pluto" args="joint_state_controller"/>
+  
+  <!--node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/-->
+  <rosparam command="load" file="$(find pluto)/config/control.yaml" />
+  <!--node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="robot_base_joint_publisher robot_base_velocity_controller"/-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+  
+  
+  <!--node pkg="tf" type="static_transform_publisher" name="map_to_odom" 
+        args="0.0 0.0 0.0 0 0 0.0 /map /odom 40" />
+  <node pkg="tf" type="static_transform_publisher" name="odom_to_basefootprint" 
+        args="0.0 0.0 0.0 0 0 0.0 /odom /base_footprint 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" 
+        args="0.0 0.0 0.0 0 0 0.0 /base_footprint /base_link 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" 
+        args="0.0 0.0 0.525 0.0 0.0 0.0 /base_link /sensor_laser 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_left_wheel" 
+        args="-0.0725 0.1145 0.0324 0.0 0.0 0.0 /base_link /left_wheel 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_right_wheel" 
+        args="-0.0725 -0.1145 0.0324 0.0 0.0 0.0 /base_link /right_wheel 40" />
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_caster_wheel" 
+        args="0.085 0 0.004 0.0 0.0 0.0 /base_link /caster_wheel 40" / -->      
+        
+
+  <!--Gazebo Simulator-->
+  <!--node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model pluto.xacro -x 0 -y 0 -z 0.5" output="screen"/-->
+  
+  <!--node name="robot_controller" pkg="pluto" type="robot_controller"/-->
+ 
+</launch>

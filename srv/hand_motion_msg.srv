@@ -1,0 +1,4 @@
+int32  arm 
+int32  handMotion
+---
+bool pos_ok

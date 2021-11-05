@@ -1,0 +1,2 @@
+g++ -lstdc++ -llapack -o compute test_ikfast.cpp -lrt
+
